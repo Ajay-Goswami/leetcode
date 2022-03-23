@@ -1,12 +1,17 @@
 class Solution {
 public:
     int brokenCalc(int startValue, int target) {
-        if(startValue >= target){
-            return startValue-target;
+        int result =0;
+        
+        while(target> startValue){
+            result++;
+            if(target%2 ==0 ){
+                target/=2;
+            }
+            else{
+                target++;
+            }
         }
-        if(target%2 ==0){
-            return 1 + brokenCalc(startValue, target/2);
-        }
-        return 1 + brokenCalc(startValue, target+1);
+        return result+(startValue - target);
     }
 };
