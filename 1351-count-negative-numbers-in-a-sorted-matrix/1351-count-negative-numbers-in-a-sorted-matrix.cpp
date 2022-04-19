@@ -5,12 +5,16 @@ public:
         int column= grid[0].size();
         int count=0;
         
-        for(int i=row-1; i>=0; i--){
-            for(int j=column-1; j>=0; j--){
-                if(grid[i][j]>=0)
-                    break;
-                count++;
+        int L = 0;
+        int R = column - 1;
+        
+        while(L < row   && R >=0 ){
+            if(grid[L][R] < 0 ){
+                count += row - L;
+                R--;
             }
+            else
+                L++;
         }
         return count;
     }
