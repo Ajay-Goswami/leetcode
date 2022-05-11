@@ -29,21 +29,3 @@ public:
     }
 };
 
-
-// vector<int> nums;
-//         for(int i=0; i<nums1.size(); i++)
-//         {
-//             nums.push_back(nums1[i]);
-//         }
-//         for(int i=0; i<nums2.size(); i++)
-//         {
-//             nums.push_back(nums2[i]);
-//         }
-//         sort(nums.begin(), nums.end());
-//         int mid = nums.size()/2;
-//         if(nums.size() % 2 == 0)
-//         {
-//             double x = (double)(nums[mid] + nums[mid-1])/2;
-//             return x;
-//         }
-//         return nums[mid];
