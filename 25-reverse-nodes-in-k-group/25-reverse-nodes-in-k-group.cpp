@@ -10,24 +10,42 @@
  */
 class Solution {
 public:
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode* temp=head;
-        for(int i=0;i<k;i++){
-            if(!temp)return head;
-            temp=temp->next;
+    
+    int lengthOfLinkedList(ListNode* head){
+        int length = 0;
+        ListNode* temp = head;
+        while(temp != NULL){
+            temp = temp->next;
+            length++;
+        }
+        return length;
+    }
+    
+    ListNode* reverseKGroup(ListNode* head, int k, int length){
+        if(length < k){
+            return head;
         }
         
-        ListNode *prev=NULL;
-        ListNode *nex1=NULL;
-        temp=head;
-        for(int i=0;i<k;i++){
-            nex1=temp->next;
-            temp->next=prev;
-            prev=temp;
-            temp=nex1;
+        int count = 0;
+        ListNode* prev = NULL, *nex = NULL, *curr = head;
+        while(count < k && curr != NULL){
+            nex = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = nex;
+            count++;
         }
-        if(nex1!=NULL)
-            head->next=reverseKGroup(nex1,k);
+        
+        if(nex != NULL){
+            head -> next = reverseKGroup(nex, k, length - k);
+        }
+        
         return prev;
+        
+    }
+    
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        int length = lengthOfLinkedList(head);
+        return reverseKGroup(head, k, length);
     }
 };
