@@ -1,23 +1,32 @@
 class Solution {
-public:
-    vector<vector<int>> ans;
-    void help(int i, vector<int> &nums, vector<int> &temp){
-        if(i==nums.size()){
-           ans.push_back(temp); 
+private :
+
+    void helper(int i , vector<int> &subSet , vector<int> &nums , vector<vector<int>> &ans){    
+        if(i == nums.size() ){
+            ans.push_back(subSet) ;
+            return ;
         }
-        else{
-            temp.push_back(nums[i]);
-            //take ith element
-            help(i+1, nums,temp);
-            
-            temp.pop_back();
-            //skip ith element
-            help(i+1,nums, temp);
-        }
+    
+        // We pick i-th Element
+        subSet.push_back(nums[i]) ;
+    
+        // We ask recursion to do rest of the task
+        helper(i + 1 , subSet , nums , ans) ;
+    
+        // Backtrack and Undo the change we have done
+        subSet.pop_back() ;
+    
+        // We don't pick the i-th element
+        helper(i + 1 , subSet , nums , ans) ;
+    
+        return ;
     }
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<int> temp;
-        help(0,nums, temp);
-        return ans;
+    
+    public:
+        vector<vector<int>> subsets(vector<int>& nums) {
+            vector<vector<int>> ans ;
+            vector<int> subSet ;
+            helper(0 , subSet , nums , ans) ;
+            return ans ;
     }
 };
