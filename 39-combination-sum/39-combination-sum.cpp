@@ -1,31 +1,36 @@
 class Solution {
-public:
-     void Sum(vector<int>& candidates, int target, vector<vector<int> >& res, vector<int>& r, int i)
-    {        
-        if(target == 0)
-        {
-            res.push_back(r);
+    private :
+
+    void help(int i, vector<int> &arr, int B, int sumTillNow, vector<int> &subSet, vector<vector<int>> &ans) {
+        if(sumTillNow == B){
+            ans.push_back(subSet);
             return;
         }
-        
-        while(i <  candidates.size() && target - candidates[i] >= 0)
-        {
-            r.push_back(candidates[i]);
-            
-            Sum(candidates,target - candidates[i],res,r,i);
-            ++i;
-        
-            r.pop_back();
-        }
+         if(sumTillNow > B) return;
+    
+        if(i >= arr.size()) return;
+    
+        help(i + 1, arr, B, sumTillNow, subSet, ans);
+    
+        sumTillNow += arr[i];
+    
+        subSet.push_back(arr[i]);
+    
+        help(i, arr, B, sumTillNow, subSet, ans);
+    
+        sumTillNow -= arr[i];
+    
+        subSet.pop_back();
     }
     
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {     
-        sort(candidates.begin(),candidates.end()); 
-        vector<int> r;
-        vector<vector<int> > res;
-        
-        Sum(candidates,target,res,r,0);
-        
-        return res;
+    
+    public:
+        vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+            vector<int> subSet;
+            int sumTillNow = 0;
+            vector<vector<int>> ans;
+            sort(candidates.begin(), candidates.end());
+            help(0, candidates, target, sumTillNow, subSet, ans);
+            return ans;
     }
 };
