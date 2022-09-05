@@ -31,7 +31,7 @@ public:
         q.push(root);
         q.push(NULL);
         
-        while(not q.empty()){
+        while(!q.empty()){
             Node* node = q.front();
             q.pop();
                if(node ==NULL){
