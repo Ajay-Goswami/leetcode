@@ -4,6 +4,7 @@ public:
         int n=s.size(),i=0;
         for(int j=0;j<n;++i,++j){
             s[i]=s[j];
+            cout<<s[i];
             if(i>0 and s[i-1]==s[i])
                 i-=2;
         }
