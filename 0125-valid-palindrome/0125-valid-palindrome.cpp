@@ -1,24 +1,22 @@
 class Solution {
 
 public:
+    bool check(string& str, int i, int &n){        
+        if(i>=n/2) 
+            return true;
+        else if (str[i]!=str[n-i-1]) 
+            return false;
+        return check(str, i+1, n);
+    }
+
     bool isPalindrome(string s) {
-        int i = 0;
-        int j = s.size() - 1;
-        
-        while (i < j) {
-            while (!isalnum(s[i]) && i < j) {
-                i++;
-            }
-            while (!isalnum(s[j]) && i < j) {
-                j--;
-            }
-            if (tolower(s[i]) != tolower(s[j])) {
-                return false;
-            }
-            i++;
-            j--;
+        string str;
+
+        for(int i=0;i<s.length();i++){
+            if(s[i]>='A'&&s[i]<='Z' || s[i]>='a'&&s[i]<='z'||s[i]>='0'&&s[i]<='9') 
+                str.push_back(tolower(s[i]));
         }
-        
-        return true;
+        int len=str.length();
+        return check(str, 0,len);
     }
 };
